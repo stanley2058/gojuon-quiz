@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SettingTab } from "./components/SettingTab";
 import { QuizTab } from "./components/QuizTab";
 import { RecordTab } from "./components/RecordTab";
-import { BrowserRouter, useLocation, useNavigate } from "react-router";
+import { HashRouter, useLocation, useNavigate } from "react-router";
 import { Toaster } from "@/components/ui/sonner";
 import "./index.css";
 import {
@@ -61,12 +61,12 @@ function JP50() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <HashRouter basename={import.meta.env.BASE_URL}>
         <main className="flex flex-col items-center min-h-svh p-6">
           <JP50 />
         </main>
         <Toaster position="top-right" />
-      </BrowserRouter>
+      </HashRouter>
     </QueryClientProvider>
   );
 }
