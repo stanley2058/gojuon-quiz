@@ -11,9 +11,7 @@ import { toast } from "sonner";
 
 function InfoDisplay({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-md bg-secondary px-3 py-2 text-sm h-full">
-      {children}
-    </span>
+    <span className="rounded-md bg-secondary px-3 py-2 h-full">{children}</span>
   );
 }
 

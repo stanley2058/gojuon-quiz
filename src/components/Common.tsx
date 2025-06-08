@@ -4,7 +4,7 @@ import { Label } from "./ui/label";
 import { Badge } from "./ui/badge";
 
 export function TitleText({ children }: { children?: ReactNode }) {
-  return <span className="text-sm font-medium">{children}</span>;
+  return <span className="font-medium">{children}</span>;
 }
 
 export function CheckboxButton({
@@ -17,7 +17,7 @@ export function CheckboxButton({
 } & Omit<ComponentProps<typeof Checkbox>, "id" | "children">) {
   return (
     <Label htmlFor={id} className="cursor-pointer">
-      <Badge variant="secondary" className="px-3 py-1.5 gap-2">
+      <Badge variant="secondary" className="px-3 py-1.5 gap-2 text-sm">
         <Checkbox id={id} name={id} {...rest} />
         <span>{children}</span>
       </Badge>
