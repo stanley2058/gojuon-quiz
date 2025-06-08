@@ -23,11 +23,11 @@ export interface OptionStore {
 
 export const optionStore = create<OptionStore>((set) => ({
   selected: {
-    hiragana: false,
+    hiragana: true,
     katagana: false,
     dakuon: [],
     handakuon: [],
-    seion: [],
+    seion: ["a"],
     youon: [],
   },
   updateSelected: (selected) => {

@@ -1,12 +1,14 @@
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./hooks";
+import { queryClient, useJP50Data } from "./hooks";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SettingTab } from "./components/SettingTab";
 import { QuizTab } from "./components/QuizTab";
+import { RecordTab } from "./components/RecordTab";
 import { BrowserRouter, useLocation, useNavigate } from "react-router";
 import "./index.css";
 
 function JP50() {
+  useJP50Data();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,6 +35,9 @@ function JP50() {
         </TabsContent>
         <TabsContent value="quiz" className="space-y-5">
           <QuizTab />
+        </TabsContent>
+        <TabsContent value="record" className="space-y-5">
+          <RecordTab />
         </TabsContent>
       </Tabs>
     </div>
