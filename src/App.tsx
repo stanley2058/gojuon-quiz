@@ -12,6 +12,7 @@ import {
   LucideNotebookText,
   LucideSettings,
 } from "lucide-react";
+import Logo from "../public/icon.svg";
 
 function JP50() {
   useJP50Data();
@@ -21,7 +22,7 @@ function JP50() {
   return (
     <div>
       <span className="flex flex-row gap-2 items-center">
-        <img src="/icon.svg" alt="icon" width="100" height="100" />
+        <img src={Logo} alt="icon" width="100" height="100" />
         <span className="text-4xl">日文五十音大進擊 🚀</span>
       </span>
       <Tabs
@@ -60,7 +61,7 @@ function JP50() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <main className="flex flex-col items-center min-h-svh p-6">
           <JP50 />
         </main>
