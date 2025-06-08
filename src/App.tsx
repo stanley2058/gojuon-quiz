@@ -61,7 +61,7 @@ function JP50() {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <HashRouter basename={import.meta.env.BASE_URL}>
+      <HashRouter>
         <main className="flex flex-col items-center min-h-svh p-6">
           <JP50 />
         </main>
