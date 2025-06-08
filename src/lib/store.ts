@@ -1,5 +1,6 @@
 import { JP50Data } from "@/hooks";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface UserAnswer {
   quiz: string;
@@ -16,32 +17,36 @@ export interface OptionStore {
   updateSelected: (selected: Partial<OptionStore["selected"]>) => void;
   quizData: string[];
   answers: Map<string, Set<string>>;
-  isTestGoing: boolean;
   setQuizData: (quizData: string[], answers: Map<string, Set<string>>) => void;
   userAnswers: UserAnswer[];
 }
 
-export const optionStore = create<OptionStore>((set) => ({
-  selected: {
-    hiragana: true,
-    katagana: false,
-    dakuon: [],
-    handakuon: [],
-    seion: ["a"],
-    youon: [],
-  },
-  updateSelected: (selected) => {
-    set((s) => ({ selected: { ...s.selected, ...selected } }));
-  },
-  quizData: [],
-  answers: new Map(),
-  isTestGoing: false,
-  setQuizData: (quizData, answers) => {
-    // TODO: save multiple rounds of answers
-    set(() => ({ quizData, answers, isTestGoing: true, userAnswers: [] }));
-  },
-  userAnswers: [],
-}));
+export const optionStore = create<OptionStore>()(
+  persist(
+    (set) => ({
+      selected: {
+        hiragana: true,
+        katagana: false,
+        dakuon: [],
+        handakuon: [],
+        seion: ["a"],
+        youon: [],
+      },
+      updateSelected: (selected) => {
+        set((s) => ({ selected: { ...s.selected, ...selected } }));
+      },
+      quizData: [],
+      answers: new Map(),
+      setQuizData: (quizData, answers) => {
+        set(() => ({ quizData, answers, userAnswers: [] }));
+      },
+      userAnswers: [],
+    }),
+    {
+      name: "jp-50",
+    },
+  ),
+);
 
 export function generateQuizData(
   selected: OptionStore["selected"],

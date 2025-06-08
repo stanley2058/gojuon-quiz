@@ -5,6 +5,7 @@ import { SettingTab } from "./components/SettingTab";
 import { QuizTab } from "./components/QuizTab";
 import { RecordTab } from "./components/RecordTab";
 import { BrowserRouter, useLocation, useNavigate } from "react-router";
+import { Toaster } from "@/components/ui/sonner";
 import "./index.css";
 
 function JP50() {
@@ -51,6 +52,7 @@ export default function App() {
         <main className="flex flex-col items-center min-h-svh p-6">
           <JP50 />
         </main>
+        <Toaster position="top-right" />
       </BrowserRouter>
     </QueryClientProvider>
   );

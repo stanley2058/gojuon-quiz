@@ -6,13 +6,15 @@ import { Button } from "./ui/button";
 
 export function RecordTab() {
   const navigate = useNavigate();
+  const quizData = useStore(optionStore, (s) => s.quizData);
   const userAnswers = useStore(optionStore, (s) => s.userAnswers);
-  const isTestGoing = useStore(optionStore, (s) => s.isTestGoing);
   const incorrectAnswers = userAnswers.filter((a) => a.isCorrect === false);
   const totalAnswers = userAnswers.length;
   const correctAnswers = totalAnswers - incorrectAnswers.length;
   const correctPercentage =
     Math.round((correctAnswers / totalAnswers) * 10000) / 100;
+  const hasTestRecord = totalAnswers > 0;
+  const isTestGoing = quizData.length > 0;
 
   return (
     <>
@@ -29,12 +31,24 @@ export function RecordTab() {
           ))}
           {isTestGoing && (
             <span>
-              測試中，回到<Link to="/quiz">測試頁面</Link>
+              測試中，回到
+              <Link to="/quiz" className="text-blue-400">
+                測試頁面
+              </Link>
+              繼續測驗。
             </span>
           )}
-          {!isTestGoing && (
+          {!isTestGoing && hasTestRecord && (
             <span>
               正確率：{correctPercentage}% ({correctAnswers}/{totalAnswers})
+            </span>
+          )}
+          {!isTestGoing && !hasTestRecord && (
+            <span>
+              <Link to="/setting" className="text-blue-400">
+                設定題目
+              </Link>
+              後開始測試吧！
             </span>
           )}
         </div>
@@ -50,6 +64,7 @@ export function RecordTab() {
             setQuizData(quiz, answers);
             navigate("/quiz");
           }}
+          disabled={!hasTestRecord}
         >
           再次測驗
         </Button>

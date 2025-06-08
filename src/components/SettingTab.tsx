@@ -11,8 +11,12 @@ export function SettingTab() {
   const { data } = useJP50Data();
   const selected = useStore(optionStore, (s) => s.selected);
   const updateSelected = useStore(optionStore, (s) => s.updateSelected);
-
-  console.log("[DEBUG]", { data });
+  const canStartTest =
+    (selected.hiragana || selected.katagana) &&
+    (selected.seion.length > 0 ||
+      selected.dakuon.length > 0 ||
+      selected.handakuon.length > 0 ||
+      selected.youon.length > 0);
 
   return (
     <>
@@ -173,7 +177,6 @@ export function SettingTab() {
         <Button
           className="cursor-pointer"
           onClick={() => {
-            // TODO: handle errors
             if (!data) return;
             const { quizData, answers } = generateQuizData(
               optionStore.getState().selected,
@@ -182,6 +185,7 @@ export function SettingTab() {
             optionStore.getState().setQuizData(quizData, answers);
             navigate("/quiz");
           }}
+          disabled={!canStartTest}
         >
           開始測驗
         </Button>

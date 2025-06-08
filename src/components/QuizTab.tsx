@@ -7,6 +7,7 @@ import { ReactNode, useCallback } from "react";
 import { useStore } from "zustand";
 import { optionStore } from "@/lib/store";
 import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 function InfoDisplay({ children }: { children: ReactNode }) {
   return (
@@ -19,7 +20,6 @@ function InfoDisplay({ children }: { children: ReactNode }) {
 function useQuiz() {
   const navigate = useNavigate();
   const quizData = useStore(optionStore, (s) => s.quizData);
-  const isTestGoing = useStore(optionStore, (s) => s.isTestGoing);
   const userAnswers = useStore(optionStore, (s) => s.userAnswers);
 
   const quiz = quizData[0];
@@ -48,9 +48,11 @@ function useQuiz() {
             isCorrect,
           },
         ],
-        isTestGoing: nextQuiz.length > 0,
       });
-      if (nextQuiz.length === 0) navigate("/record");
+      if (nextQuiz.length === 0) {
+        navigate("/record");
+        toast.success("測驗完畢！");
+      }
     },
     [navigate],
   );
@@ -62,7 +64,6 @@ function useQuiz() {
     percentage,
     lastResult,
     answerQuiz,
-    isTestGoing,
   };
 }
 
