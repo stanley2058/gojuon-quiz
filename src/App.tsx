@@ -15,6 +15,9 @@ function JP50() {
 
   return (
     <div>
+      <span>
+        <img src="/icon.svg" alt="icon" width="100" height="100" />
+      </span>
       <Tabs
         value={location.pathname.slice(1) || "setting"}
         onValueChange={(value) => navigate(`/${value}`)}
