@@ -2,7 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Divider, TitleText } from "./Common";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { LucideSendHorizontal } from "lucide-react";
+import {
+  LucideCircleAlert,
+  LucideCircleCheck,
+  LucideSendHorizontal,
+} from "lucide-react";
 import { ReactNode, useCallback } from "react";
 import { useStore } from "zustand";
 import { optionStore } from "@/lib/store";
@@ -95,10 +99,20 @@ export function QuizTab() {
         <div className="flex flex-col gap-2.5 px-3 py-2.5 flex-1">
           <TitleText>資訊</TitleText>
           <InfoDisplay>
-            {lastResult && lastResult.isCorrect && "🎉 正確"}
-            {lastResult &&
-              !lastResult.isCorrect &&
-              `❌ 錯誤，${lastResult.quiz} 正確答案為 ${lastResult.answer}`}
+            {lastResult && lastResult.isCorrect && (
+              <span className="flex gap-1 items-center">
+                <LucideCircleCheck size={18} className="text-green-400" />
+                正確
+              </span>
+            )}
+            {lastResult && !lastResult.isCorrect && (
+              <span className="flex gap-1 items-center">
+                <LucideCircleAlert size={18} className="text-red-400" />
+                <span>
+                  錯誤，{lastResult.quiz} 正確答案為 {lastResult.answer}
+                </span>
+              </span>
+            )}
             {!lastResult && "N/A"}
           </InfoDisplay>
         </div>

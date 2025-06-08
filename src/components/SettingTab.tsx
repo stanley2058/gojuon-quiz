@@ -5,6 +5,7 @@ import { generateQuizData, optionStore } from "@/lib/store";
 import { useStore } from "zustand";
 import { CheckboxButton, Divider, TitleText } from "./Common";
 import { useNavigate } from "react-router";
+import { LucideSparkles } from "lucide-react";
 
 export function SettingTab() {
   const navigate = useNavigate();
@@ -188,6 +189,7 @@ export function SettingTab() {
           disabled={!canStartTest}
         >
           開始測驗
+          <LucideSparkles />
         </Button>
       </div>
     </>

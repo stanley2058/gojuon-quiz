@@ -7,6 +7,11 @@ import { RecordTab } from "./components/RecordTab";
 import { BrowserRouter, useLocation, useNavigate } from "react-router";
 import { Toaster } from "@/components/ui/sonner";
 import "./index.css";
+import {
+  LucideNotebookPen,
+  LucideNotebookText,
+  LucideSettings,
+} from "lucide-react";
 
 function JP50() {
   useJP50Data();
@@ -15,8 +20,9 @@ function JP50() {
 
   return (
     <div>
-      <span>
+      <span className="flex flex-row gap-2 items-center">
         <img src="/icon.svg" alt="icon" width="100" height="100" />
+        <span className="text-4xl">日文五十音大進擊 🚀</span>
       </span>
       <Tabs
         value={location.pathname.slice(1) || "setting"}
@@ -26,12 +32,15 @@ function JP50() {
         <TabsList>
           <TabsTrigger className="cursor-pointer" value="setting">
             設定
+            <LucideSettings />
           </TabsTrigger>
           <TabsTrigger className="cursor-pointer" value="quiz">
             測驗
+            <LucideNotebookPen />
           </TabsTrigger>
           <TabsTrigger className="cursor-pointer" value="record">
             記錄
+            <LucideNotebookText />
           </TabsTrigger>
         </TabsList>
         <TabsContent value="setting" className="space-y-5">
