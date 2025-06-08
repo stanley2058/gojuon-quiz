@@ -48,6 +48,23 @@ export const optionStore = create<OptionStore>()(
   ),
 );
 
+// @see https://stackoverflow.com/a/2450976/13234407
+function shuffleArray<T>(array: T[]) {
+  let currentIndex = array.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+    // Pick a remaining element...
+    const randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    const tmp = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = tmp;
+  }
+}
+
 export function generateQuizData(
   selected: OptionStore["selected"],
   data: JP50Data,
@@ -62,7 +79,7 @@ export function generateQuizData(
     if (katagana) quizData.push(...data.katakana[option]);
   }
 
-  quizData.sort(() => Math.random() - 0.5);
+  shuffleArray(quizData);
 
   const answers = new Map<string, Set<string>>();
   for (const quiz of quizData) {
