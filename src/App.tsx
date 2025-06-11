@@ -12,7 +12,7 @@ import {
   LucideNotebookText,
   LucideSettings,
 } from "lucide-react";
-import Logo from "../public/icon.svg";
+import Logo from "./icon.svg";
 
 function JP50() {
   useJP50Data();
